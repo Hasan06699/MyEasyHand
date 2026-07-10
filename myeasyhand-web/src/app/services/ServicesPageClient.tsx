@@ -11,9 +11,11 @@ import { EmptyState } from '@/components/ui/empty-state';
 import { Breadcrumbs } from '@/components/seo/Breadcrumbs';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { CityRequiredGate } from '@/components/location/CityPicker';
+import { useCityStore } from '@/stores/city.store';
 import { filterServicesClient, sortServicesClient } from '@/lib/utils';
 
-export default function ServicesPageClient() {
+function ServicesCatalog() {
   const searchParams = useSearchParams();
   const initialQ = searchParams.get('q') || '';
   const [query, setQuery] = useState(initialQ);
@@ -22,13 +24,16 @@ export default function ServicesPageClient() {
   const [maxPrice, setMaxPrice] = useState('');
   const [showFilters, setShowFilters] = useState(false);
   const [page, setPage] = useState(1);
+  const city = useCityStore((s) => s.city);
+  const cityKey = city?.slug || city?.name || '';
 
   const { data, isLoading } = useQuery({
-    queryKey: ['services', page],
+    queryKey: ['services', page, cityKey],
     queryFn: async () => {
-      const res = await serviceApi.list({ page, limit: 24 });
+      const res = await serviceApi.list({ page, limit: 24, city: cityKey });
       return res.data;
     },
+    enabled: !!city,
   });
 
   const services = useMemo(() => {
@@ -46,8 +51,8 @@ export default function ServicesPageClient() {
       <Breadcrumbs items={[{ label: 'Services' }]} />
       <div className="mt-4 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-slate-900">Browse Services</h1>
-          <p className="mt-1 text-slate-600">{total} services available</p>
+          <h1 className="text-3xl font-bold text-slate-900">Services in {city?.name}</h1>
+          <p className="mt-1 text-slate-600">{total} services available in your city</p>
         </div>
         <Button variant="outline" onClick={() => setShowFilters(!showFilters)} className="sm:hidden">
           <SlidersHorizontal className="mr-2 h-4 w-4" />
@@ -111,5 +116,13 @@ export default function ServicesPageClient() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function ServicesPageClient() {
+  return (
+    <CityRequiredGate>
+      <ServicesCatalog />
+    </CityRequiredGate>
   );
 }

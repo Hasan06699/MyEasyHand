@@ -313,6 +313,8 @@ export interface ServiceFilters {
   parentCategoryId?: string;
   subCategoryId?: string;
   categoryId?: string;
+  /** City id, slug, or name — required for customer catalog */
+  city?: string;
   minPrice?: number;
   maxPrice?: number;
   sort?: 'price_asc' | 'price_desc' | 'newest' | 'rating';

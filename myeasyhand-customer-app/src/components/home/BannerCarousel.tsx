@@ -12,7 +12,7 @@ import { CopyCouponButton } from '@/components/promotions/CopyCouponButton';
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 const BANNER_WIDTH = SCREEN_WIDTH - spacing.lg * 2;
 const BANNER_HEIGHT = 170;
-const BRAND_NAVY = '#003c40';
+const BRAND_NAVY = '#1565C0';
 const BRAND_TEAL = '#31c1ca';
 
 interface BannerCarouselProps {

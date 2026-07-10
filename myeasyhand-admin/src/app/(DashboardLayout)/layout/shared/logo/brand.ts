@@ -1,15 +1,25 @@
-/** MyEasyHand brand tokens — keep in sync with brand guidelines */
+/** MyEasyHand Admin brand tokens — colors from official logo (orange-led UI) */
 export const BRAND = {
-  navy: '#122B63',
-  teal: '#3FAFB0',
-  tealDark: '#2E8F93',
+  name: 'MyEasyHand',
+  tagline: 'Home Repairs & Cleaning Services',
+  /** MyEasy blue (logo) */
+  blue: '#1E88E5',
+  blueLight: '#00AEEF',
+  blueDark: '#1565C0',
+  /** Hand orange (logo) — primary for admin */
+  orange: '#FF8F00',
+  orangeLight: '#F9A01B',
+  orangeDark: '#E65100',
   white: '#FFFFFF',
-  lightBg: '#F5F7FA',
-  headerBg: '#003c40',
+  lightBg: '#FFF8F0',
+  /** Admin header — orange (distinct from customer web blue) */
+  headerBg: '#E65100',
+  text: '#1A1A1A',
+  textMuted: '#6B7280',
   websiteUrl: process.env.NEXT_PUBLIC_WEBSITE_URL || 'https://myeasyhand.in',
 } as const;
 
-export type MyEasyHandLogoVariant = 'gradient' | 'onDark' | 'login' | 'white';
+export type MyEasyHandLogoVariant = 'gradient' | 'onDark' | 'login' | 'white' | 'icon';
 
 export const LOGO_SIZES = {
   sm: { icon: 28, wordmark: 18, gap: 8 },

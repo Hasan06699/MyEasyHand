@@ -28,7 +28,7 @@ export function CopyCouponButton({ code }: CopyCouponButtonProps) {
         styles.button,
         { backgroundColor: '#FFFFFF', opacity: pressed ? 0.85 : 1 },
       ]}>
-      <Feather name={copied ? 'check' : 'copy'} size={16} color="#003c40" />
+      <Feather name={copied ? 'check' : 'copy'} size={16} color="#1565C0" />
       <Text style={styles.label}>{copied ? 'Copied!' : 'Copy Coupon Code'}</Text>
     </Pressable>
   );
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     borderRadius: radius.md,
   },
   label: {
-    color: '#003c40',
+    color: '#1565C0',
     fontSize: fontSize.sm,
     fontWeight: '700',
   },

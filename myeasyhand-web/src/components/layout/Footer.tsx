@@ -26,21 +26,23 @@ const footerLinks = {
 
 export function Footer() {
   return (
-    <footer className="border-t bg-slate-900 text-slate-300">
-      <div className="mx-auto max-w-7xl px-4 py-12">
+    <footer className="mt-8 border-t border-brand-blue/10 bg-[#0B1F3A] text-slate-300">
+      <div className="section-shell py-14">
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-5">
           <div className="lg:col-span-2">
-            <MyEasyHandLogo variant="white" size="md" />
-            <p className="mt-3 max-w-sm text-sm leading-relaxed text-slate-400">
-              India&apos;s trusted multi-vendor service booking platform. Book verified professionals for home
-              services, repairs, cleaning, and more.
+            <div className="inline-flex rounded-xl bg-white px-3 py-2">
+              <MyEasyHandLogo variant="gradient" size="md" disableLink />
+            </div>
+            <p className="mt-4 max-w-sm text-sm leading-relaxed text-slate-400">
+              Your local partner for home repairs &amp; cleaning. Book verified professionals
+              city by city — cook, plumber, electrician, cleaner, and more.
             </p>
-            <div className="mt-4 flex gap-3">
+            <div className="mt-5 flex gap-2">
               {[Facebook, Instagram, Twitter, Linkedin].map((Icon, i) => (
                 <a
                   key={i}
                   href="#"
-                  className="flex h-9 w-9 items-center justify-center rounded-lg bg-slate-800 text-slate-400 transition-colors hover:bg-blue-600 hover:text-white"
+                  className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-slate-300 transition-colors hover:bg-brand-orange hover:text-white"
                   aria-label="Social link"
                 >
                   <Icon className="h-4 w-4" />
@@ -51,11 +53,14 @@ export function Footer() {
 
           {Object.entries(footerLinks).map(([title, links]) => (
             <div key={title}>
-              <h4 className="font-semibold text-white">{title}</h4>
-              <ul className="mt-4 space-y-2">
+              <h4 className="text-sm font-bold uppercase tracking-wider text-white">{title}</h4>
+              <ul className="mt-4 space-y-2.5">
                 {links.map((link) => (
                   <li key={link.href}>
-                    <Link href={link.href} className="text-sm text-slate-400 transition-colors hover:text-white">
+                    <Link
+                      href={link.href}
+                      className="text-sm text-slate-400 transition-colors hover:text-brand-orange"
+                    >
                       {link.label}
                     </Link>
                   </li>
@@ -65,7 +70,7 @@ export function Footer() {
           ))}
         </div>
 
-        <div className="mt-10 flex flex-col items-center justify-between gap-4 border-t border-slate-800 pt-8 text-sm text-slate-500 sm:flex-row">
+        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 text-sm text-slate-500 sm:flex-row">
           <p>© {new Date().getFullYear()} {SITE_NAME}. All rights reserved.</p>
           <p>
             {CONTACT_EMAIL} · {CONTACT_PHONE}

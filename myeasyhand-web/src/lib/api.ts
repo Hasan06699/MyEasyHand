@@ -1,7 +1,7 @@
 export { api, getApiBaseUrl } from './api/client';
 export { authApi } from './api/auth';
 export { businessApi } from './api/businesses';
-export { serviceApi } from './api/services';
+export { serviceApi, cityApi } from './api/services';
 export { bookingApi } from './api/bookings';
 export { promotionApi, couponApi } from './api/promotions';
 export { cartApi } from './api/cart';

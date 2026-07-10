@@ -5,7 +5,7 @@ import { BOOKING_TRACKING_STEPS } from '@/constants';
 const API_URL =
   process.env.EXPO_PUBLIC_API_URL ||
   Constants.expoConfig?.extra?.apiUrl ||
-  'http://localhost:5050/api/v1';
+  'http://localhost:5051/api/v1';
 
 export function getApiBaseUrl(): string {
   return API_URL.replace(/\/api\/v1$/, '');

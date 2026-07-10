@@ -81,7 +81,7 @@ function BannerPreview({ banner, onClick }: { banner: PromotionBanner; onClick?:
         'relative min-h-[320px] overflow-hidden rounded-2xl md:min-h-[420px]',
         clickable && 'cursor-pointer transition-opacity hover:opacity-95',
       )}
-      style={{ backgroundColor: banner.backgroundColor || BRAND.navy }}
+      style={{ backgroundColor: banner.backgroundColor || BRAND.blueDark }}
     >
       {hasImage && <BannerImage banner={banner} />}
 
@@ -153,7 +153,7 @@ export function BannerCarousel({ banners }: { banners: PromotionBanner[] }) {
     return (
       <div
         className="relative flex min-h-[320px] items-center justify-center overflow-hidden rounded-2xl px-6 py-16 text-center text-white md:min-h-[420px]"
-        style={{ background: `linear-gradient(135deg, ${BRAND.headerBg} 0%, ${BRAND.teal} 100%)` }}
+        style={{ background: `linear-gradient(135deg, ${BRAND.headerBg} 0%, ${BRAND.blue} 100%)` }}
       >
         <div>
           <h1 className="text-3xl font-bold md:text-5xl">Book Trusted Services with MyEasyHand</h1>

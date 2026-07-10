@@ -10,7 +10,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <head>
-        <link rel="icon" href="/images/favicon.ico" />
+        <link rel="icon" href="/favicon.png" />
         <title>MyEasyHand Admin — Service Booking Platform</title>
       </head>
       <body suppressHydrationWarning>

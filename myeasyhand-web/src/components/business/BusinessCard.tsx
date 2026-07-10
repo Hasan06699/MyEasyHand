@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { MapPin, Star } from 'lucide-react';
+import { MapPin, Star, ChevronRight } from 'lucide-react';
 import type { Business } from '@/types';
 import { getMediaUrl } from '@/lib/utils';
 import { Badge } from '@/components/ui/badge';
@@ -9,41 +9,44 @@ export function BusinessCard({ business }: { business: Business }) {
   return (
     <Link
       href={`/businesses/${business.slug}`}
-      className="group block overflow-hidden rounded-xl border bg-white shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-lg"
+      className="card-surface group relative flex overflow-hidden"
     >
-      <div className="relative h-32 bg-gradient-to-br from-blue-600 to-violet-600">
-        {business.banner && (
-          <Image src={getMediaUrl(business.banner)} alt={business.name} fill className="object-cover" />
-        )}
-        <div className="absolute -bottom-6 left-4">
-          <div className="flex h-14 w-14 items-center justify-center overflow-hidden rounded-xl border-4 border-white bg-white shadow-md">
-            {business.logo ? (
-              <Image src={getMediaUrl(business.logo)} alt={business.name} width={48} height={48} className="object-cover" />
-            ) : (
-              <span className="text-lg font-bold text-blue-600">{business.name.charAt(0)}</span>
+      <div className="absolute inset-y-0 left-0 w-1.5 bg-gradient-to-b from-brand-blue to-brand-orange" />
+      <div className="flex flex-1 gap-4 p-4 pl-5">
+        <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-2xl bg-gradient-to-br from-[#E3F2FD] to-[#FFF3E0] ring-2 ring-white shadow-md">
+          {business.logo ? (
+            <Image src={getMediaUrl(business.logo)} alt={business.name} fill className="object-cover" />
+          ) : (
+            <span className="flex h-full w-full items-center justify-center text-xl font-extrabold text-brand-blue">
+              {business.name.charAt(0)}
+            </span>
+          )}
+        </div>
+        <div className="min-w-0 flex-1">
+          <div className="flex items-start justify-between gap-2">
+            <h3 className="truncate font-bold text-slate-900 group-hover:text-brand-blue">{business.name}</h3>
+            {business.emergencyServiceAvailable && (
+              <Badge className="shrink-0 rounded-full bg-brand-orange/15 text-brand-orange-dark">24/7</Badge>
             )}
           </div>
+          {business.about && <p className="mt-1 line-clamp-2 text-sm text-slate-500">{business.about}</p>}
+          <div className="mt-3 flex flex-wrap items-center gap-3 text-xs text-slate-500">
+            {business.address?.city && (
+              <span className="inline-flex items-center gap-1">
+                <MapPin className="h-3.5 w-3.5 text-brand-blue" />
+                {business.address.city}
+                {business.address.state ? `, ${business.address.state}` : ''}
+              </span>
+            )}
+            {business.yearsOfExperience ? (
+              <span className="inline-flex items-center gap-1 font-semibold text-amber-600">
+                <Star className="h-3.5 w-3.5 fill-current" />
+                {business.yearsOfExperience}+ yrs
+              </span>
+            ) : null}
+          </div>
         </div>
-      </div>
-      <div className="p-4 pt-8">
-        <div className="flex items-start justify-between gap-2">
-          <h3 className="font-semibold text-slate-900 group-hover:text-blue-600">{business.name}</h3>
-          {business.emergencyServiceAvailable && <Badge variant="warning">24/7</Badge>}
-        </div>
-        {business.about && <p className="mt-1 line-clamp-2 text-sm text-slate-500">{business.about}</p>}
-        {business.address?.city && (
-          <p className="mt-2 flex items-center gap-1 text-xs text-slate-500">
-            <MapPin className="h-3.5 w-3.5" />
-            {business.address.city}
-            {business.address.state ? `, ${business.address.state}` : ''}
-          </p>
-        )}
-        {business.yearsOfExperience ? (
-          <p className="mt-2 flex items-center gap-1 text-xs text-amber-600">
-            <Star className="h-3.5 w-3.5 fill-current" />
-            {business.yearsOfExperience}+ years experience
-          </p>
-        ) : null}
+        <ChevronRight className="mt-1 h-5 w-5 shrink-0 text-slate-300 transition-transform group-hover:translate-x-0.5 group-hover:text-brand-orange" />
       </div>
     </Link>
   );

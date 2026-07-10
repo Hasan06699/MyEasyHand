@@ -19,6 +19,7 @@ import {
 } from './seed-demo-data';
 import { seedDemoCoupons } from './seed-demo-coupons';
 import { seedDemoPromotions } from './seed-demo-promotions';
+import { seedCities } from './seed-cities';
 
 async function migrateLegacyServices(ownerId: typeof User.prototype._id) {
   const legacy = await Service.collection
@@ -379,6 +380,8 @@ async function seed(): Promise<void> {
       categoryMap,
     });
   }
+
+  await seedCities();
 
   logger.info('Seed completed successfully');
   await disconnectDatabase();

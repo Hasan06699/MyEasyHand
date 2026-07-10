@@ -4,7 +4,7 @@ Super Admin and Business Owner management panel for the MyEasyHand platform.
 
 | Property | Value |
 |---|---|
-| **Port** | 8080 |
+| **Port** | 8081 |
 | **URL** | https://admin.myeasyhand.in |
 | **Template** | MaterialPro Next.js Free |
 | **Stack** | Next.js, TypeScript, MUI, React Query, Zustand |
@@ -17,7 +17,7 @@ npm install
 npm run dev
 ```
 
-Open http://localhost:8080
+Open http://localhost:8081
 
 ## Admin Modules (Planned)
 

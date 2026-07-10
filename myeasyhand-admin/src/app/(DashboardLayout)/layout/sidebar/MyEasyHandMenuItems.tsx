@@ -23,6 +23,7 @@ const MyEasyHandMenuItems: MenuitemsType[] = [
   { id: uniqueId(), title: 'Businesses', icon: 'solar:buildings-2-linear', href: '/businesses', roles: ['super_admin'] },
   { id: uniqueId(), title: 'Service Owners', icon: 'solar:user-id-linear', href: '/service-owners', roles: ['super_admin'] },
   { id: uniqueId(), title: 'Categories', icon: 'hugeicons:legal-hammer', href: '/categories', requiresSubscription: true },
+  { id: uniqueId(), title: 'Cities', icon: 'solar:map-point-wave-linear', href: '/cities', roles: ['super_admin'] },
   { id: uniqueId(), title: 'Services', icon: 'solar:box-minimalistic-linear', href: '/services', requiresSubscription: true },
   { id: uniqueId(), title: 'Employees', icon: 'solar:users-group-rounded-linear', href: '/employees', roles: ['super_admin', 'business_owner'], requiresSubscription: true },
   { id: uniqueId(), title: 'Customers', icon: 'solar:user-circle-linear', href: '/customers', roles: ['super_admin', 'business_owner'], requiresSubscription: true },

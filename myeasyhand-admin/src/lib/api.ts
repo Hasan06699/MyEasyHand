@@ -1,6 +1,6 @@
 import axios, { AxiosError, InternalAxiosRequestConfig } from 'axios';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5050/api/v1';
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5051/api/v1';
 const AUTH_STORAGE_KEY = 'myeasyhand-auth';
 
 let refreshPromise: Promise<string> | null = null;
@@ -445,6 +445,7 @@ export interface ServiceItem {
     slug: string;
     ownerId?: { _id: string; firstName: string; lastName: string; email: string };
   };
+  cityIds?: { _id: string; name: string; slug: string; state?: string }[];
   createdBy?: { firstName: string; lastName: string; email: string };
 }
 
@@ -454,6 +455,7 @@ export type ServiceFormData = {
   slug: string;
   parentCategoryId: string;
   subCategoryId: string;
+  cityIds: string[];
   serviceCode: string;
   shortDescription: string;
   fullDescription: string;
@@ -893,6 +895,34 @@ export const categoryRequestApi = {
     api.put<ApiResponse<unknown>>(`/services/category-requests/${id}/approve`, { reviewNote }),
   reject: (id: string, reviewNote?: string) =>
     api.put<ApiResponse<CategoryRequestItem>>(`/services/category-requests/${id}/reject`, { reviewNote }),
+};
+
+export interface CityItem {
+  _id: string;
+  name: string;
+  slug: string;
+  state?: string;
+  country?: string;
+  sortOrder: number;
+  isActive: boolean;
+}
+
+export const cityApi = {
+  listPublic: () => api.get<ApiResponse<CityItem[]>>('/cities'),
+  listAdmin: (includeInactive = true) =>
+    api.get<ApiResponse<CityItem[]>>('/cities/admin', {
+      params: { includeInactive: includeInactive ? 'true' : undefined },
+    }),
+  create: (data: {
+    name: string;
+    state?: string;
+    country?: string;
+    sortOrder?: number;
+    isActive?: boolean;
+  }) => api.post<ApiResponse<CityItem>>('/cities', data),
+  update: (id: string, data: Record<string, unknown>) =>
+    api.put<ApiResponse<CityItem>>(`/cities/${id}`, data),
+  remove: (id: string) => api.delete<ApiResponse<{ message: string }>>(`/cities/${id}`),
 };
 
 export const serviceApi = {

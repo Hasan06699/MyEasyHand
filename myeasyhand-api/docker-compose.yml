@@ -6,10 +6,10 @@ services:
     container_name: myeasyhand-api
     restart: unless-stopped
     ports:
-      - "5050:5050"
+      - "5051:5051"
     environment:
       - NODE_ENV=production
-      - PORT=5050
+      - PORT=5051
       - MONGODB_URI=mongodb://mongodb:27017/myeasyhand
       - REDIS_URL=redis://redis:6379
     env_file:

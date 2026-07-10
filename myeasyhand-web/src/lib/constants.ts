@@ -59,7 +59,7 @@ export const BOOKING_TRACKING_STEPS: { key: BookingStatus; label: string }[] = [
 
 export const SITE_NAME = 'MyEasyHand';
 export const SITE_DESCRIPTION =
-  'Book trusted home services, repairs, cleaning, and more with verified professionals across India.';
+  'Book trusted home repairs & cleaning services with verified professionals — city by city across India.';
 export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://myeasyhand.in';
 export const CONTACT_EMAIL = 'info@myeasyhand.in';
 export const CONTACT_PHONE = '+91 8818907445';

@@ -4,10 +4,10 @@ dotenv.config();
 
 export const config = {
   env: process.env.NODE_ENV || 'development',
-  port: parseInt(process.env.PORT || '5050', 10),
+  port: parseInt(process.env.PORT || '5051', 10),
   apiVersion: process.env.API_VERSION || 'v1',
   appName: process.env.APP_NAME || 'MyEasyHand API',
-  appUrl: process.env.APP_URL || 'http://localhost:5050',
+  appUrl: process.env.APP_URL || 'http://localhost:5051',
   mongodb: {
     uri: process.env.MONGODB_URI || 'mongodb://localhost:27017/myeasyhand',
     dbName: process.env.MONGODB_DB_NAME || 'myeasyhand',
@@ -36,7 +36,7 @@ export const config = {
     from: process.env.SMTP_FROM || 'info@myeasyhand.in',
   },
   cors: {
-    origins: (process.env.CORS_ORIGINS || 'http://localhost:3030,http://localhost:8080')
+    origins: (process.env.CORS_ORIGINS || 'http://localhost:3031,http://localhost:8081')
       .split(',')
       .map((s) => s.trim())
       .filter(Boolean),

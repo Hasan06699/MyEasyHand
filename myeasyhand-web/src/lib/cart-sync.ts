@@ -5,7 +5,7 @@ const GUEST_CART_KEY = 'myeasyhand-guest-cart';
 const PULL_INTERVAL_MS = 10000;
 const PUSH_DEBOUNCE_MS = 300;
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5050/api/v1';
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5051/api/v1';
 
 let pushTimer: ReturnType<typeof setTimeout> | null = null;
 let pullInterval: ReturnType<typeof setInterval> | null = null;

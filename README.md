@@ -13,9 +13,9 @@ Enterprise-grade multi-tenant local service booking platform.
 
 | Package | Port | Description |
 |---|---|---|
-| [myeasyhand-api](./myeasyhand-api) | 5050 | Backend API (Express + MongoDB + Redis) |
-| [myeasyhand-web](./myeasyhand-web) | 3030 | Customer website (Next.js) |
-| [myeasyhand-admin](./myeasyhand-admin) | 8080 | Admin panel (Next.js + MaterialPro) |
+| [myeasyhand-api](./myeasyhand-api) | 5051 | Backend API (Express + MongoDB + Redis) |
+| [myeasyhand-web](./myeasyhand-web) | 3031 | Customer website (Next.js) |
+| [myeasyhand-admin](./myeasyhand-admin) | 8081 | Admin panel (Next.js + MaterialPro) |
 | [myeasyhand-customer-app](./myeasyhand-customer-app) | — | Customer mobile app (Expo) |
 | [myeasyhand-employee-app](./myeasyhand-employee-app) | — | Employee mobile app (Expo) |
 

@@ -1,9 +1,9 @@
 import Link from 'next/link';
 import { Box } from '@mui/material';
-import { LOGO_SIZES, LogoSize, MyEasyHandLogoVariant } from './brand';
+import { BRAND, LOGO_SIZES, LogoSize, MyEasyHandLogoVariant } from './brand';
 
 export interface MyEasyHandLogoProps {
-  /** `gradient` — light backgrounds; `onDark` — navy header / sidebar */
+  /** `gradient` — light backgrounds; `onDark` — orange header / sidebar */
   variant?: MyEasyHandLogoVariant;
   size?: LogoSize;
   /** Icon only (favicon-sized slots, collapsed sidebar) */
@@ -14,18 +14,19 @@ export interface MyEasyHandLogoProps {
 }
 
 const LOGO_FILES: Record<MyEasyHandLogoVariant, string> = {
-  gradient: '/images/logos/logo-standard.svg',
-  onDark: '/images/logos/logo-dark.svg',
-  login: '/images/logos/login-logo.svg',
-  white: '/images/logos/logo-white.svg',
+  gradient: '/images/logos/logo-wordmark.png',
+  onDark: '/images/logos/logo-wordmark.png',
+  login: '/images/logos/icon.png',
+  white: '/images/logos/logo-wordmark.png',
+  icon: '/images/logos/icon.png',
 };
 
-const ICON_FILE = '/images/logos/icon.svg';
+const ICON_FILE = '/images/logos/icon.png';
 
 const HEIGHTS: Record<LogoSize, { full: number; icon: number }> = {
   sm: { full: 28, icon: 28 },
   md: { full: 36, icon: 36 },
-  lg: { full: 56, icon: 44 },
+  lg: { full: 56, icon: 48 },
 };
 
 export function MyEasyHandLogo({
@@ -39,6 +40,7 @@ export function MyEasyHandLogo({
   const heights = HEIGHTS[size];
   const src = iconOnly ? ICON_FILE : LOGO_FILES[variant];
   const height = iconOnly ? heights.icon : heights.full;
+  const onDark = variant === 'onDark' || variant === 'white';
 
   const content = (
     <Box
@@ -48,6 +50,10 @@ export function MyEasyHandLogo({
         gap: iconOnly ? 0 : `${dims.gap}px`,
         textDecoration: 'none',
         flexShrink: 0,
+        bgcolor: onDark ? BRAND.white : 'transparent',
+        borderRadius: onDark ? '10px' : 0,
+        px: onDark ? 1.25 : 0,
+        py: onDark ? 0.5 : 0,
       }}
     >
       <Box

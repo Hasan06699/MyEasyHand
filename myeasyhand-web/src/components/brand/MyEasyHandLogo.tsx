@@ -3,9 +3,10 @@ import Link from 'next/link';
 import { BRAND, LOGO_SIZES, LogoSize, MyEasyHandLogoVariant } from '@/lib/brand';
 
 const LOGO_FILES: Record<MyEasyHandLogoVariant, string> = {
-  gradient: '/images/logos/logo-standard.svg',
-  onDark: '/images/logos/logo-dark.svg',
-  white: '/images/logos/logo-white.svg',
+  gradient: '/images/logos/logo-wordmark.png',
+  onDark: '/images/logos/logo-wordmark.png',
+  white: '/images/logos/logo-wordmark.png',
+  icon: '/images/logos/icon.png',
 };
 
 export interface MyEasyHandLogoProps {
@@ -32,7 +33,7 @@ export function MyEasyHandLogo({
       alt="MyEasyHand"
       width={dims.maxWidth}
       height={dims.height}
-      priority={variant === 'onDark'}
+      priority
       className={className}
       style={{ height: dims.height, width: 'auto', maxWidth: dims.maxWidth }}
     />
@@ -41,7 +42,7 @@ export function MyEasyHandLogo({
   if (disableLink) return content;
 
   return (
-    <Link href={href} className="inline-flex shrink-0 items-center">
+    <Link href={href} className="inline-flex shrink-0 items-center" aria-label={BRAND.name}>
       {content}
     </Link>
   );

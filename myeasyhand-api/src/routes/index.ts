@@ -18,6 +18,7 @@ import couponRoutes from '../modules/coupons/presentation/coupon.routes';
 import promotionRoutes from '../modules/promotions/presentation/promotion.routes';
 import cartRoutes from '../modules/cart/presentation/cart.routes';
 import platformSettingsRoutes from '../modules/platform-settings/presentation/platform-settings.routes';
+import cityRoutes from '../modules/cities/presentation/city.routes';
 import { getRedis } from '../config/redis';
 
 const router = Router();
@@ -61,5 +62,6 @@ router.use('/coupons', couponRoutes);
 router.use('/promotions', promotionRoutes);
 router.use('/cart', cartRoutes);
 router.use('/platform-settings', platformSettingsRoutes);
+router.use('/cities', cityRoutes);
 
 export default router;

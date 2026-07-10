@@ -12,8 +12,8 @@ const ROOT = path.join(__dirname, '..', '..');
 const BRAND = path.join(__dirname, 'logo');
 const SOURCE_ICON = path.join(__dirname, 'source', 'final-icon.png');
 
-const BRAND_BLUE = '#122B63';
-const BRAND_LIGHT = '#F5F7FA';
+const BRAND_BLUE = '#1E88E5';
+const BRAND_LIGHT = '#F5F9FC';
 
 async function iconOnBackground(size, bg = BRAND_BLUE, iconScale = 0.62) {
   const iconSize = Math.round(size * iconScale);
@@ -27,8 +27,8 @@ async function iconOnBackground(size, bg = BRAND_BLUE, iconScale = 0.62) {
 
   const offset = Math.round((size - iconSize) / 2);
   const bgColor = bg === BRAND_BLUE
-    ? { r: 18, g: 43, b: 99 }
-    : { r: 245, g: 247, b: 250 };
+    ? { r: 30, g: 136, b: 229 }
+    : { r: 245, g: 249, b: 252 };
 
   return sharp({
     create: {

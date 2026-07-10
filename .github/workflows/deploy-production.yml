@@ -1,0 +1,48 @@
+name: Deploy Production
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install sshpass
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq sshpass
+
+      - name: Deploy to VPS
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+          SSH_PASSWORD: ${{ secrets.SSH_PASSWORD }}
+          SSH_PORT: ${{ secrets.SSH_PORT || '22' }}
+          DEPLOY_PATH: ${{ secrets.DEPLOY_PATH || '/var/www/myeasyhand' }}
+          DOMAIN: ${{ secrets.DOMAIN || 'myeasyhand.in' }}
+          ADMIN_DOMAIN: ${{ secrets.ADMIN_DOMAIN || 'admin.myeasyhand.in' }}
+          API_DOMAIN: ${{ secrets.API_DOMAIN || 'api.myeasyhand.in' }}
+        run: |
+          set -euo pipefail
+          mkdir -p doc/deployment/secrets
+          cat > doc/deployment/secrets/server.access <<EOF
+          VPS_IP=${SSH_HOST}
+          SSH_PORT=${SSH_PORT}
+          SSH_USER=${SSH_USER}
+          SSH_PASSWORD=${SSH_PASSWORD}
+          DOMAIN=${DOMAIN}
+          ADMIN_DOMAIN=${ADMIN_DOMAIN}
+          API_DOMAIN=${API_DOMAIN}
+          DEPLOY_PATH=${DEPLOY_PATH}
+          EOF
+          # Strip leading spaces from heredoc
+          sed -i 's/^[[:space:]]*//' doc/deployment/secrets/server.access
+          chmod +x scripts/deploy-live.sh
+          ./scripts/deploy-live.sh

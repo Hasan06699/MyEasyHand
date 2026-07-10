@@ -34,7 +34,7 @@ export function CopyCouponButton({
       type="button"
       size={size}
       onClick={handleCopy}
-      className={cn('gap-2 bg-white text-[#003c40] hover:bg-slate-100', className)}
+      className={cn('gap-2 bg-white text-[#1565C0] hover:bg-slate-100', className)}
     >
       {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
       {copied ? 'Copied!' : 'Copy Coupon Code'}

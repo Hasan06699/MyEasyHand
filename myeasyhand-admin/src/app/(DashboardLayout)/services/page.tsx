@@ -28,6 +28,7 @@ import {
   Tooltip,
   Tabs,
   Tab,
+  Autocomplete,
 } from '@mui/material';
 import { Icon } from '@iconify/react';
 import { IconTrash, IconEdit, IconPhoto, IconStar, IconFlame, IconCheck, IconX } from '@tabler/icons-react';
@@ -36,10 +37,12 @@ import {
   featureRequestApi,
   mediaApi,
   serviceOwnerApi,
+  cityApi,
   ServiceItem,
   ServiceFormData,
   ServiceGalleryItem,
   FeatureRequestItem,
+  CityItem,
   DEFAULT_SERVICE_ICON,
   getCategoryParentId,
   orderCategoriesHierarchically,
@@ -57,6 +60,7 @@ const emptyForm: ServiceFormData = {
   slug: '',
   parentCategoryId: '',
   subCategoryId: '',
+  cityIds: [],
   serviceCode: '',
   shortDescription: '',
   fullDescription: '',
@@ -142,6 +146,7 @@ function serviceToForm(service: ServiceItem): ServiceFormData {
     slug: service.slug,
     parentCategoryId: service.parentCategoryId?._id ?? '',
     subCategoryId: service.subCategoryId?._id ?? '',
+    cityIds: (service.cityIds ?? []).map((c) => c._id),
     serviceCode: service.serviceCode ?? '',
     shortDescription: service.shortDescription,
     fullDescription: service.fullDescription ?? '',
@@ -173,6 +178,7 @@ function formToPayload(form: ServiceFormData) {
     slug: form.slug || undefined,
     parentCategoryId: form.parentCategoryId,
     subCategoryId: form.subCategoryId || null,
+    cityIds: form.cityIds.length ? form.cityIds : undefined,
     serviceCode: form.serviceCode || undefined,
     shortDescription: form.shortDescription,
     fullDescription: form.fullDescription || undefined,
@@ -276,9 +282,18 @@ export default function ServicesPage() {
     },
   });
 
+  const { data: cities = [] } = useQuery({
+    queryKey: ['admin-cities-active'],
+    queryFn: async () => {
+      const res = await cityApi.listAdmin(false);
+      return res.data.data.filter((c) => c.isActive);
+    },
+  });
+
   const orderedCategories = categories ? orderCategoriesHierarchically(categories) : [];
   const parentCategories = orderedCategories.filter((c) => !getCategoryParentId(c));
   const subCategories = orderedCategories.filter((c) => getCategoryParentId(c) === form.parentCategoryId);
+  const selectedCities = cities.filter((c) => form.cityIds.includes(c._id));
 
   const clearFieldError = (field: FormField) => {
     setFieldErrors((prev) => {
@@ -345,6 +360,7 @@ export default function ServicesPage() {
     if (!form.name.trim()) errors.name = 'Service name is required';
     if (isSuperAdmin && !form.businessId) errors.businessId = 'Select a service owner';
     if (!form.parentCategoryId) errors.parentCategoryId = 'Select a parent category';
+    if (!form.cityIds.length) errors.cityIds = 'Select at least one city where this service is available';
     if (!form.shortDescription.trim()) errors.shortDescription = 'Short description is required';
     if (!form.image) errors.image = 'Service image is required (square 1:1, max 1 MB)';
     if (!form.priceType) errors.priceType = 'Select a price type';
@@ -919,6 +935,34 @@ export default function ServicesPage() {
                   ))}
                 </TextField>
               </Grid>
+              <Grid size={{ xs: 12 }}>
+                <FieldHint
+                  label="Available Cities"
+                  required
+                  hint="Customers in these cities will see this service. Categories only appear if a service exists in the selected city."
+                />
+                <Autocomplete
+                  multiple
+                  options={cities}
+                  value={selectedCities}
+                  getOptionLabel={(option: CityItem) =>
+                    option.state ? `${option.name}, ${option.state}` : option.name
+                  }
+                  isOptionEqualToValue={(a, b) => a._id === b._id}
+                  onChange={(_, value) => {
+                    clearFieldError('cityIds');
+                    setForm({ ...form, cityIds: value.map((c) => c._id) });
+                  }}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      placeholder={cities.length ? 'Select cities' : 'Add cities under Cities menu first'}
+                      error={!!fieldErrors.cityIds}
+                    />
+                  )}
+                />
+                <FieldMessage error={fieldErrors.cityIds} />
+              </Grid>
             </Grid>
 
             <Divider />
@@ -1119,7 +1163,6 @@ export default function ServicesPage() {
                     clearFieldError('discountExpiresAt');
                     setForm({ ...form, discountExpiresAt: e.target.value });
                   }}
-                  InputLabelProps={{ shrink: true }}
                 />
                 <FieldMessage error={fieldErrors.discountExpiresAt} />
               </Grid>

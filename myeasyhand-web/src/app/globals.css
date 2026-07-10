@@ -4,27 +4,53 @@
 
 @layer base {
   :root {
-    --background: 248 250 252;
+    --background: 240 247 252;
     --foreground: 15 23 42;
     --card: 255 255 255;
-    --primary: 63 175 176;
+    --primary: 30 136 229;
     --primary-foreground: 255 255 255;
-    --secondary: 18 43 99;
-    --muted: 241 245 249;
+    --secondary: 255 143 0;
+    --muted: 226 239 249;
     --muted-foreground: 100 116 139;
-    --border: 226 232 240;
-    --radius: 0.75rem;
-    --brand-header: 0 60 64;
-    --brand-teal: 63 175 176;
-    --brand-navy: 18 43 99;
+    --border: 203 225 242;
+    --radius: 1.25rem;
+    --brand-blue: 30 136 229;
+    --brand-orange: 255 143 0;
   }
 
   * {
-    @apply border-slate-200;
+    @apply border-[rgb(var(--border))];
   }
 
   body {
-    @apply bg-slate-50 text-slate-900 antialiased;
+    @apply bg-[rgb(var(--background))] text-slate-900 antialiased;
+    font-feature-settings: 'ss01' on, 'cv11' on;
+  }
+
+  h1, h2, h3, h4 {
+    @apply tracking-tight text-slate-900;
+  }
+}
+
+@layer components {
+  .section-shell {
+    @apply mx-auto max-w-7xl px-4 sm:px-6;
+  }
+
+  .section-title {
+    @apply text-2xl font-extrabold text-slate-900 md:text-3xl;
+  }
+
+  .section-kicker {
+    @apply mb-2 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.18em] text-[#FF8F00];
+  }
+
+  .card-surface {
+    @apply rounded-[1.25rem] bg-white shadow-[0_8px_30px_rgba(21,101,192,0.08)] ring-1 ring-[#1E88E5]/[0.08] transition-all duration-300;
+  }
+
+  .card-surface:hover {
+    @apply -translate-y-1 shadow-[0_16px_40px_rgba(21,101,192,0.14)] ring-[#1E88E5]/20;
   }
 }
 
@@ -34,10 +60,22 @@
   }
 
   .gradient-primary {
-    background: linear-gradient(135deg, #003c40 0%, #3fafb0 100%);
+    background: linear-gradient(135deg, #1565C0 0%, #1E88E5 55%, #00AEEF 100%);
+  }
+
+  .gradient-brand {
+    background: linear-gradient(120deg, #1E88E5 0%, #FF8F00 100%);
+  }
+
+  .gradient-mesh {
+    background:
+      radial-gradient(ellipse 80% 60% at 10% 20%, rgba(30, 136, 229, 0.22), transparent 55%),
+      radial-gradient(ellipse 70% 50% at 90% 10%, rgba(255, 143, 0, 0.18), transparent 50%),
+      radial-gradient(ellipse 60% 40% at 50% 100%, rgba(0, 174, 239, 0.15), transparent 45%),
+      #F0F7FC;
   }
 
   .glass {
-    @apply bg-white/80 backdrop-blur-md;
+    @apply bg-white/75 backdrop-blur-xl;
   }
 }

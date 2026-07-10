@@ -34,6 +34,7 @@ const serviceFields = {
   metaKeywords: Joi.string().optional().allow(''),
   metaDescription: Joi.string().optional().allow(''),
   businessId: Joi.string().optional(),
+  cityIds: Joi.array().items(Joi.string()).min(1).optional(),
 };
 
 const createServiceSchema = Joi.object(serviceFields);
@@ -65,6 +66,7 @@ const updateServiceSchema = Joi.object({
   metaKeywords: Joi.string().optional().allow(''),
   metaDescription: Joi.string().optional().allow(''),
   businessId: Joi.string().optional(),
+  cityIds: Joi.array().items(Joi.string()).min(1).optional(),
 });
 
 const createFeatureRequestSchema = Joi.object({

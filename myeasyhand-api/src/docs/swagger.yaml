@@ -13,7 +13,7 @@ info:
     email: info@myeasyhand.in
     url: https://myeasyhand.in
 servers:
-  - url: http://localhost:5050/api/v1
+  - url: http://localhost:5051/api/v1
     description: Development
   - url: https://api.myeasyhand.in/api/v1
     description: Production

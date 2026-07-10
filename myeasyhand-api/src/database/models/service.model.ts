@@ -30,6 +30,8 @@ export interface IService extends Document {
   isPopular: boolean;
   status: ServiceStatus;
   displayOrder: number;
+  /** Cities where this service is available (city-first catalog) */
+  cityIds: Types.ObjectId[];
   metaTitle?: string;
   metaKeywords?: string;
   metaDescription?: string;
@@ -67,6 +69,7 @@ const serviceSchema = new Schema<IService>(
       required: true,
     },
     displayOrder: { type: Number, default: 0 },
+    cityIds: [{ type: Schema.Types.ObjectId, ref: 'City', index: true }],
     metaTitle: { type: String, maxlength: 255 },
     metaKeywords: String,
     metaDescription: String,
@@ -80,5 +83,6 @@ serviceSchema.index({ businessId: 1, slug: 1 }, { unique: true });
 serviceSchema.index({ serviceCode: 1 }, { unique: true, sparse: true });
 serviceSchema.index({ status: 1, displayOrder: 1 });
 serviceSchema.index({ isFeatured: 1, isPopular: 1 });
+serviceSchema.index({ cityIds: 1, status: 1, isDeleted: 1 });
 
 export const Service = model<IService>('Service', serviceSchema);

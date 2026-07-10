@@ -9,6 +9,7 @@ import { AuditLogService } from '../../audit/application/audit-log.service';
 import { ServiceOwnerSettingsService } from '../../service-owners/application/service-owner-settings.service';
 import { PlanLimitService } from '../../subscriptions/application/plan-limit.service';
 import { ServiceGalleryService } from './service-gallery.service';
+import { CityService } from '../../cities/application/city.service';
 import { Request } from 'express';
 
 function slugify(text: string): string {
@@ -85,11 +86,13 @@ export type ServiceInput = {
   metaKeywords?: string;
   metaDescription?: string;
   businessId?: string;
+  cityIds?: string[];
 };
 
 const SERVICE_POPULATE = [
   { path: 'parentCategoryId', select: 'name slug' },
   { path: 'subCategoryId', select: 'name slug' },
+  { path: 'cityIds', select: 'name slug state' },
   { path: 'createdBy', select: 'firstName lastName email' },
   {
     path: 'businessId',
@@ -137,12 +140,76 @@ export class ServiceModuleService {
     return filter;
   }
 
+  /** Apply city scope for public catalog (customers must select a city) */
+  private static async applyCityFilter(
+    req: Request,
+    filter: FilterQuery<IService>,
+  ): Promise<FilterQuery<IService>> {
+    const cityParam = (req.query.city as string | undefined)?.trim();
+    const isPublic = !req.user || req.user.roles.includes('customer');
+    const forceCity = req.query.requireCity === 'true';
+
+    if (!cityParam) {
+      if (isPublic || forceCity) {
+        // Public catalog without city → empty (city-first)
+        filter._id = { $in: [] };
+      }
+      return filter;
+    }
+
+    const cityId = await CityService.resolveCityId(cityParam);
+    if (cityId) {
+      filter.cityIds = cityId;
+    }
+    return filter;
+  }
+
   static async listCategories(req: Request) {
     const filter: Record<string, unknown> = { isDeleted: false };
     const isSuperAdmin = req.user?.roles.includes('super_admin');
 
     if (!isSuperAdmin || req.query.includeInactive !== 'true') {
       filter.isActive = true;
+    }
+
+    const cityParam = (req.query.city as string | undefined)?.trim();
+    const isPublic = !req.user || req.user.roles.includes('customer');
+
+    // City-first: only categories that have active services in the selected city
+    if (cityParam || isPublic) {
+      if (!cityParam && isPublic) {
+        return [];
+      }
+      if (cityParam) {
+        const cityId = await CityService.resolveCityId(cityParam);
+        const serviceFilter: FilterQuery<IService> = {
+          isDeleted: false,
+          status: 'active',
+          cityIds: cityId!,
+        };
+        const services = await Service.find(serviceFilter)
+          .select('parentCategoryId subCategoryId')
+          .lean();
+        const categoryIds = new Set<string>();
+        for (const s of services) {
+          if (s.parentCategoryId) categoryIds.add(s.parentCategoryId.toString());
+          if (s.subCategoryId) categoryIds.add(s.subCategoryId.toString());
+        }
+        if (categoryIds.size === 0) return [];
+
+        // Include parents of subcategories so tree still works
+        const found = await ServiceCategory.find({
+          _id: { $in: [...categoryIds] },
+          isDeleted: false,
+          ...(filter.isActive !== undefined ? { isActive: true } : {}),
+        })
+          .select('_id parentId')
+          .lean();
+        for (const c of found) {
+          if (c.parentId) categoryIds.add(c.parentId.toString());
+        }
+        filter._id = { $in: [...categoryIds].map((id) => new Types.ObjectId(id)) };
+      }
     }
 
     const categories = await ServiceCategory.find(filter)
@@ -290,7 +357,8 @@ export class ServiceModuleService {
   }
 
   static async listServices(req: Request, page = 1, limit = 20) {
-    const filter = this.getBusinessFilter(req);
+    let filter = this.getBusinessFilter(req);
+    filter = await this.applyCityFilter(req, filter);
 
     if (req.query.ownerId && req.user?.roles.includes('super_admin')) {
       const businesses = await Business.find({
@@ -332,6 +400,23 @@ export class ServiceModuleService {
     );
 
     return { items: enriched, meta: { page, limit, total } };
+  }
+
+  private static async resolveCityIds(cityIds?: string[]): Promise<Types.ObjectId[]> {
+    const { City } = await import('../../../database/models/city.model');
+    if (!cityIds?.length) {
+      const all = await City.find({ isDeleted: false, isActive: true }).select('_id');
+      if (!all.length) {
+        throw new ValidationError('No active cities. Add cities in Admin → Cities first.');
+      }
+      return all.map((c) => c._id as Types.ObjectId);
+    }
+    const unique = [...new Set(cityIds.filter(Boolean))];
+    const cities = await City.find({ _id: { $in: unique }, isDeleted: false, isActive: true });
+    if (cities.length !== unique.length) {
+      throw new ValidationError('One or more selected cities are invalid or inactive');
+    }
+    return cities.map((c) => c._id as Types.ObjectId);
   }
 
   private static async resolveBusinessId(req: Request, bodyBusinessId?: string): Promise<string> {
@@ -423,6 +508,7 @@ export class ServiceModuleService {
     }
 
     const serviceCode = await this.resolveServiceCode(data.serviceCode);
+    const cityIds = await this.resolveCityIds(data.cityIds);
 
     const service = await Service.create({
       businessId: new Types.ObjectId(businessId),
@@ -448,6 +534,7 @@ export class ServiceModuleService {
       isPopular: isSuperAdmin ? (data.isPopular ?? false) : false,
       status,
       displayOrder: data.displayOrder ?? 0,
+      cityIds,
       metaTitle: data.metaTitle,
       metaKeywords: data.metaKeywords,
       metaDescription: data.metaDescription,
@@ -554,6 +641,10 @@ export class ServiceModuleService {
 
     if (data.icon !== undefined && !data.icon) {
       updates.icon = DEFAULT_SERVICE_ICON;
+    }
+
+    if (data.cityIds !== undefined) {
+      updates.cityIds = await this.resolveCityIds(data.cityIds);
     }
 
     if (data.serviceCode !== undefined) {

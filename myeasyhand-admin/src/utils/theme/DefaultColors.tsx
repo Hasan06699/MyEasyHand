@@ -15,15 +15,15 @@ const baselightTheme = createTheme({
   direction: "ltr",
   palette: {
     primary: {
-      main: '#1B84FF',
-      light: '#EDF5FD',
-      dark: '#1B84FF',
+      main: '#FF8F00',
+      light: '#FFF3E0',
+      dark: '#E65100',
       contrastText: "#ffffff"
     },
     secondary: {
-      main: '#43CED7',
-      light: '#F2FCFC',
-      dark: '#43CED7',
+      main: '#1E88E5',
+      light: '#E3F2FD',
+      dark: '#1565C0',
     },
     success: {
       main: '#2cd07e',
@@ -64,12 +64,12 @@ const baselightTheme = createTheme({
     action: {
       disabledBackground: 'rgba(73,82,88,0.12)',
       hoverOpacity: 0.02,
-      hover: '#EDF5FD',
+      hover: '#FFF3E0',
     },
 
-    divider: '#ebf1f6',
+    divider: '#FFE0B2',
     background: {
-      default: '#EEF5F9',
+      default: '#FFF8F0',
       paper: '#ffffff',
     },
   },
@@ -271,7 +271,7 @@ const baselightTheme = createTheme({
           },
           borderRadius: "7px",
           '&.Mui-focused .MuiOutlinedInput-notchedOutline, &:hover .MuiOutlinedInput-notchedOutline': {
-            borderColor: '#1B84FF !important'
+            borderColor: '#FF8F00 !important'
           },
         },
         input: {

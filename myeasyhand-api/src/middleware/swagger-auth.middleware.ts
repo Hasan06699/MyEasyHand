@@ -97,7 +97,7 @@ export function getSwaggerLoginHtml(error?: string): string {
       align-items: center;
       justify-content: center;
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: linear-gradient(135deg, #122B63 0%, #1a3d8f 100%);
+      background: linear-gradient(135deg, #1565C0 0%, #1E88E5 100%);
       color: #1f2937;
     }
     .card {
@@ -108,7 +108,7 @@ export function getSwaggerLoginHtml(error?: string): string {
       padding: 32px;
       box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
     }
-    h1 { margin: 0 0 8px; font-size: 22px; color: #122B63; }
+    h1 { margin: 0 0 8px; font-size: 22px; color: #1565C0; }
     p { margin: 0 0 24px; color: #6b7280; font-size: 14px; }
     label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; }
     input {

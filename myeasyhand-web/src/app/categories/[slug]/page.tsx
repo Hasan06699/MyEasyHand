@@ -9,54 +9,55 @@ import { ServiceCard } from '@/components/services/ServiceCard';
 import { CategoryCard } from '@/components/services/CategoryCard';
 import { ServiceCardSkeleton } from '@/components/ui/skeleton';
 import { Breadcrumbs } from '@/components/seo/Breadcrumbs';
+import { CityRequiredGate } from '@/components/location/CityPicker';
+import { useCityStore } from '@/stores/city.store';
 
-export default function CategoryDetailPage({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = use(params);
+function CategoryDetailCatalog({ slug }: { slug: string }) {
+  const city = useCityStore((s) => s.city);
+  const cityKey = city?.slug || city?.name || '';
 
   const { data: categories = [] } = useQuery({
-    queryKey: ['categories'],
+    queryKey: ['categories', cityKey],
     queryFn: async () => {
-      const res = await serviceApi.categories(true);
+      const res = await serviceApi.categories(true, cityKey);
       return res.data.data;
     },
+    enabled: !!city,
   });
 
   const category = findCategoryBySlug(categories, slug);
   const children = category?.children || [];
   const isSubcategory = !!category?.parentId;
 
-  // Direct services for this category (parent or sub)
   const { data: directServices = [], isLoading: directLoading } = useQuery({
-    queryKey: ['services', 'category-direct', category?._id, isSubcategory],
+    queryKey: ['services', 'category-direct', category?._id, isSubcategory, cityKey],
     queryFn: async () => {
       if (isSubcategory) {
-        const res = await serviceApi.list({ subCategoryId: category!._id, limit: 24 });
+        const res = await serviceApi.list({ subCategoryId: category!._id, limit: 24, city: cityKey });
         return res.data.data;
       }
-      const res = await serviceApi.list({ parentCategoryId: category!._id, limit: 24 });
+      const res = await serviceApi.list({ parentCategoryId: category!._id, limit: 24, city: cityKey });
       return res.data.data;
     },
-    enabled: !!category?._id,
+    enabled: !!category?._id && !!city,
   });
 
-  // Per-subcategory service rows (related category services)
   const { data: subcategoryServices = [] } = useQuery({
-    queryKey: ['services', 'subcategory-rows', category?._id, children.map((c) => c._id)],
+    queryKey: ['services', 'subcategory-rows', category?._id, children.map((c) => c._id), cityKey],
     queryFn: async () => {
       const rows = await Promise.all(
         children.map(async (sub) => {
-          const res = await serviceApi.list({ subCategoryId: sub._id, limit: 8 });
+          const res = await serviceApi.list({ subCategoryId: sub._id, limit: 8, city: cityKey });
           return { subcategory: sub, services: res.data.data };
         }),
       );
       return rows.filter((row) => row.services.length > 0);
     },
-    enabled: !!category?._id && children.length > 0,
+    enabled: !!category?._id && children.length > 0 && !!city,
   });
 
-  // Sibling / related categories when viewing a subcategory
   const { data: relatedServices = [] } = useQuery({
-    queryKey: ['services', 'related', category?._id],
+    queryKey: ['services', 'related', category?._id, cityKey],
     queryFn: async () => {
       const parentId =
         typeof category!.parentId === 'object' && category!.parentId !== null
@@ -71,17 +72,21 @@ export default function CategoryDetailPage({ params }: { params: Promise<{ slug:
 
       const rows = await Promise.all(
         siblings.slice(0, 3).map(async (sib) => {
-          const res = await serviceApi.list({ subCategoryId: sib._id, limit: 4 });
+          const res = await serviceApi.list({ subCategoryId: sib._id, limit: 4, city: cityKey });
           return { subcategory: sib, services: res.data.data };
         }),
       );
       return rows.filter((row) => row.services.length > 0);
     },
-    enabled: !!category?._id && isSubcategory,
+    enabled: !!category?._id && isSubcategory && !!city,
   });
 
   if (!category) {
-    return <div className="mx-auto max-w-7xl px-4 py-16 text-center">Category not found</div>;
+    return (
+      <div className="mx-auto max-w-7xl px-4 py-16 text-center">
+        Category not found in {city?.name}
+      </div>
+    );
   }
 
   return (
@@ -89,6 +94,7 @@ export default function CategoryDetailPage({ params }: { params: Promise<{ slug:
       <Breadcrumbs items={[{ label: 'Categories', href: '/categories' }, { label: category.name }]} />
       <h1 className="mt-4 text-3xl font-bold">{category.name}</h1>
       {category.description && <p className="mt-2 text-slate-600">{category.description}</p>}
+      <p className="mt-1 text-sm text-slate-500">Showing services available in {city?.name}</p>
 
       {children.length > 0 && (
         <section className="mt-8">
@@ -120,11 +126,10 @@ export default function CategoryDetailPage({ params }: { params: Promise<{ slug:
             ))}
           </div>
         ) : (
-          <p className="mt-6 text-slate-500">No services in this category yet.</p>
+          <p className="mt-6 text-slate-500">No services in this category for {city?.name} yet.</p>
         )}
       </section>
 
-      {/* Subcategory rows for parent categories */}
       {subcategoryServices.map(({ subcategory, services }) => (
         <section key={subcategory._id} className="mt-12">
           <div className="flex items-center justify-between">
@@ -147,7 +152,6 @@ export default function CategoryDetailPage({ params }: { params: Promise<{ slug:
         </section>
       ))}
 
-      {/* Related sibling subcategory rows */}
       {relatedServices.map(({ subcategory, services }) => (
         <section key={subcategory._id} className="mt-12">
           <div className="flex items-center justify-between">
@@ -170,5 +174,14 @@ export default function CategoryDetailPage({ params }: { params: Promise<{ slug:
         </section>
       ))}
     </div>
+  );
+}
+
+export default function CategoryDetailPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = use(params);
+  return (
+    <CityRequiredGate>
+      <CategoryDetailCatalog slug={slug} />
+    </CityRequiredGate>
   );
 }

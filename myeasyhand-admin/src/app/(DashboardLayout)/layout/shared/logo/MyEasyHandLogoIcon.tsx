@@ -6,14 +6,14 @@ interface MyEasyHandLogoIconProps {
 }
 
 /**
- * Calendar + location pin — primary MyEasyHand brand mark.
- * viewBox tuned to match the official horizontal lockup proportions.
+ * Compact brand mark — house + tools silhouette using logo colors.
+ * Prefer PNG icon for full lockup; this SVG is for collapsed sidebar slots.
  */
 export function MyEasyHandLogoIcon({ size = 36, variant = 'gradient' }: MyEasyHandLogoIconProps) {
-  const onDark = variant === 'onDark';
-  const calendarStroke = onDark ? BRAND.white : BRAND.navy;
-  const dotFill = BRAND.teal;
-  const pinFill = BRAND.teal;
+  const onDark = variant === 'onDark' || variant === 'white';
+  const stroke = onDark ? BRAND.white : BRAND.blueDark;
+  const accent = BRAND.orange;
+  const fill = BRAND.blue;
 
   return (
     <svg
@@ -24,40 +24,20 @@ export function MyEasyHandLogoIcon({ size = 36, variant = 'gradient' }: MyEasyHa
       xmlns="http://www.w3.org/2000/svg"
       aria-hidden
     >
-      {/* Calendar body */}
-      <rect
-        x="10"
-        y="14"
-        width="28"
-        height="26"
-        rx="4"
-        stroke={calendarStroke}
+      {/* Hand outline */}
+      <path
+        d="M24 6C18 6 14 12 14 18V28C14 34 18 40 24 42C30 40 34 34 34 28V18C34 12 30 6 24 6Z"
+        stroke={stroke}
         strokeWidth="2.5"
         fill="none"
       />
-      {/* Binding rings */}
-      <rect x="16" y="10" width="3" height="8" rx="1.5" fill={calendarStroke} />
-      <rect x="29" y="10" width="3" height="8" rx="1.5" fill={calendarStroke} />
-      {/* Date grid — 2 × 3 teal squares */}
-      {[0, 1, 2].map((col) =>
-        [0, 1].map((row) => (
-          <rect
-            key={`${col}-${row}`}
-            x={15 + col * 7}
-            y={19 + row * 7}
-            width="5"
-            height="5"
-            rx="1"
-            fill={dotFill}
-          />
-        )),
-      )}
-      {/* Location pin overlapping bottom-left */}
-      <path
-        d="M8 34C8 28.5 11.5 25 15.5 25C19.5 25 23 28.5 23 34C23 38 15.5 44 15.5 44C15.5 44 8 38 8 34Z"
-        fill={pinFill}
-      />
-      <circle cx="15.5" cy="33.5" r="2.5" fill={onDark ? BRAND.navy : BRAND.white} />
+      {/* House */}
+      <path d="M18 26L24 20L30 26V34H18V26Z" fill={fill} />
+      <rect x="21.5" y="27" width="5" height="5" rx="0.5" fill={onDark ? BRAND.blueDark : BRAND.white} />
+      {/* Wrench accent */}
+      <path d="M12 22L16 26" stroke={accent} strokeWidth="2.5" strokeLinecap="round" />
+      {/* Spray accent */}
+      <circle cx="34" cy="24" r="2.5" fill={accent} />
     </svg>
   );
 }

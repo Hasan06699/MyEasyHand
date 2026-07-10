@@ -4,7 +4,7 @@ Production-ready customer-facing service booking website for the MyEasyHand plat
 
 | Property | Value |
 |---|---|
-| **Port** | 3030 |
+| **Port** | 3031 |
 | **Stack** | Next.js 15, TypeScript, Tailwind CSS, React Query, Zustand, Framer Motion |
 | **API** | Consumes `myeasyhand-api` REST endpoints |
 
@@ -16,9 +16,9 @@ npm install
 npm run dev
 ```
 
-Open http://localhost:3030
+Open http://localhost:3031
 
-Set `NEXT_PUBLIC_API_URL` to your backend (default: `http://localhost:5050/api/v1`).
+Set `NEXT_PUBLIC_API_URL` to your backend (default: `http://localhost:5051/api/v1`).
 
 ## Features
 

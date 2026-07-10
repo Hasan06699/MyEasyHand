@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { Plus_Jakarta_Sans } from 'next/font/google';
 import { QueryProvider } from '@/providers/QueryProvider';
 import { CartSyncInit } from '@/components/cart/CartSyncInit';
 import { Header } from '@/components/layout/Header';
@@ -7,6 +8,12 @@ import { ToastProvider } from '@/components/ui/toast-provider';
 import OneSignalInit from '@/components/notifications/OneSignalInit';
 import { SITE_DESCRIPTION, SITE_NAME } from '@/lib/constants';
 import './globals.css';
+
+const jakarta = Plus_Jakarta_Sans({
+  subsets: ['latin'],
+  variable: '--font-jakarta',
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   title: { default: `${SITE_NAME} — Book Services Online`, template: `%s | ${SITE_NAME}` },
@@ -27,8 +34,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className="min-h-screen pb-16 md:pb-0" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning className={jakarta.variable}>
+      <body className="min-h-screen font-sans pb-24 md:pb-0" suppressHydrationWarning>
         <QueryProvider>
           <CartSyncInit />
           <OneSignalInit />

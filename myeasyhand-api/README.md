@@ -4,7 +4,7 @@ Centralized API server for the MyEasyHand Service Booking Platform.
 
 | Property | Value |
 |---|---|
-| **Port** | 5050 |
+| **Port** | 5051 |
 | **Docs** | `/api/docs` |
 | **Stack** | Node.js, Express, TypeScript, MongoDB, Redis |
 
@@ -29,8 +29,8 @@ npm install
 npm run dev
 ```
 
-API: http://localhost:5050  
-Swagger: http://localhost:5050/api/docs (admin login required — `super_admin` or `business_owner`)
+API: http://localhost:5051  
+Swagger: http://localhost:5051/api/docs (admin login required — `super_admin` or `business_owner`)
 
 Regenerate OpenAPI path files after adding routes:
 
