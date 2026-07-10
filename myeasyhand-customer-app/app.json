@@ -1,0 +1,64 @@
+{
+  "expo": {
+    "name": "MyEasyHand",
+    "slug": "myeasyhand-customer",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
+    "scheme": "myeasyhand",
+    "extra": {
+      "router": {
+        "origin": "https://myeasyhand.in"
+      }
+    },
+    "userInterfaceStyle": "automatic",
+    "splash": {
+      "image": "./assets/images/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#122B63"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "info.myeasyhand.customer",
+      "associatedDomains": [
+        "applinks:myeasyhand.in",
+        "applinks:www.myeasyhand.in"
+      ]
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "backgroundColor": "#122B63"
+      },
+      "package": "info.myeasyhand.customer",
+      "intentFilters": [
+        {
+          "action": "VIEW",
+          "autoVerify": true,
+          "data": [
+            {
+              "scheme": "https",
+              "host": "myeasyhand.in",
+              "pathPrefix": "/"
+            },
+            {
+              "scheme": "https",
+              "host": "www.myeasyhand.in",
+              "pathPrefix": "/"
+            }
+          ],
+          "category": ["BROWSABLE", "DEFAULT"]
+        }
+      ]
+    },
+    "plugins": [
+      "expo-router",
+      "expo-image",
+      "expo-status-bar",
+      "expo-web-browser"
+    ],
+    "experiments": {
+      "typedRoutes": true
+    }
+  }
+}

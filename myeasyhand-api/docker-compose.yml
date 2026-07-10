@@ -1,0 +1,82 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: myeasyhand-api
+    restart: unless-stopped
+    ports:
+      - "5050:5050"
+    environment:
+      - NODE_ENV=production
+      - PORT=5050
+      - MONGODB_URI=mongodb://mongodb:27017/myeasyhand
+      - REDIS_URL=redis://redis:6379
+    env_file:
+      - .env
+    volumes:
+      - ./uploads:/app/uploads
+    depends_on:
+      mongodb:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - myeasyhand-network
+
+  mongodb:
+    image: mongo:7
+    container_name: myeasyhand-mongodb
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_DATABASE: myeasyhand
+    volumes:
+      - mongodb_data:/data/db
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/myeasyhand --quiet
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - myeasyhand-network
+
+  redis:
+    image: redis:7-alpine
+    container_name: myeasyhand-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - myeasyhand-network
+
+  nginx:
+    image: nginx:alpine
+    container_name: myeasyhand-nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/conf.d:/etc/nginx/conf.d:ro
+    depends_on:
+      - api
+    networks:
+      - myeasyhand-network
+
+volumes:
+  mongodb_data:
+  redis_data:
+
+networks:
+  myeasyhand-network:
+    driver: bridge

@@ -1,0 +1,93 @@
+openapi: 3.0.3
+info:
+  title: MyEasyHand Service Booking API
+  description: |
+    Enterprise SaaS Service Booking Platform API.
+
+    **Access:** Admin login required at `/api/docs` (super_admin or business_owner).
+
+    **Authentication:** Use Bearer JWT from `POST /auth/login` in the Authorize button.
+  version: 1.0.0
+  contact:
+    name: MyEasyHand Support
+    email: info@myeasyhand.in
+    url: https://myeasyhand.in
+servers:
+  - url: http://localhost:5050/api/v1
+    description: Development
+  - url: https://api.myeasyhand.in/api/v1
+    description: Production
+tags:
+  - name: Health
+    description: Health and readiness checks
+  - name: Auth
+    description: Authentication and session management
+  - name: Businesses
+    description: Business tenant management
+  - name: Services
+    description: Service catalog and categories
+  - name: Bookings
+    description: Booking lifecycle management
+  - name: Media
+    description: File uploads
+  - name: Plans
+    description: Subscription plans
+  - name: Subscriptions
+    description: Business subscriptions
+  - name: Plan Requests
+    description: Plan upgrade requests
+  - name: Notifications
+    description: Push and in-app notifications
+  - name: Service Owners
+    description: Service owner management
+  - name: Audit Logs
+    description: Audit trail
+  - name: Employees
+    description: Employee management
+  - name: Customers
+    description: Customer management
+  - name: Owner Profile
+    description: Business owner profile
+  - name: Coupons
+    description: Coupon management
+  - name: Promotions
+    description: Banners and service rows
+  - name: Cart
+    description: Customer shopping cart
+  - name: Platform Settings
+    description: Platform configuration
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: JWT access token from POST /auth/login
+  schemas:
+    SuccessResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        message:
+          type: string
+        data:
+          type: object
+    ErrorResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: false
+        message:
+          type: string
+    PaginationQuery:
+      type: object
+      properties:
+        page:
+          type: integer
+          default: 1
+        limit:
+          type: integer
+          default: 20

@@ -1,0 +1,124 @@
+import React from "react";
+import { usePathname } from "next/navigation";
+import { Box, Typography } from "@mui/material";
+import {
+  Sidebar as MUI_Sidebar,
+  Menu,
+  MenuItem,
+  Submenu,
+} from "react-mui-sidebar";
+import MyEasyHandMenuItems from "./MyEasyHandMenuItems";
+import Link from "next/link";
+import { Icon } from "@iconify/react";
+import { useAuthStore } from "@/stores/auth.store";
+import { useSubscriptionAccess } from "@/hooks/useSubscriptionAccess";
+
+function filterMenuByRole(items: typeof MyEasyHandMenuItems, roleSlugs: string[], hasActiveSubscription: boolean) {
+  return items.filter((item) => {
+    if (item.roles && !item.roles.some((role) => roleSlugs.includes(role))) return false;
+    if (item.requiresSubscription && roleSlugs.includes('business_owner') && !roleSlugs.includes('super_admin') && !hasActiveSubscription) {
+      return false;
+    }
+    return true;
+  });
+}
+
+
+
+
+const renderMenuItems = (items: any[], pathDirect: string) => {
+
+  return items.map((item) => {
+    const Itemicon = <Icon icon={item.icon} width="20" height="20" />
+
+    if (item.subheader) {
+      // Display Subheader
+      return (
+        <Box sx={{ margin: "0 -24px", textTransform: 'uppercase', '& .MuiListSubheader-root': { fontWeight: '600 !important' } }} key={item.subheader}>
+          <Menu subHeading={item.subheader} key={item.subheader}>
+            <></>
+          </Menu>
+        </Box>
+      );
+    }
+
+    //If the item has children (submenu)
+    if (item.children) {
+      return (
+        <Submenu key={item.id} title={item.title}
+          borderRadius='999px'
+          icon={Itemicon}
+        >
+          {renderMenuItems(item.children, pathDirect)
+          }
+        </Submenu >
+      );
+    }
+
+    // If the item has no children, render a MenuItem
+
+    return (
+      <Link
+        href={item.href}
+        key={item.id}
+        target={item.href && item.href.startsWith("https") ? "_blank" : "_self"}
+        style={{ textDecoration: 'none' }}
+      >
+        <MenuItem
+          isSelected={pathDirect === item?.href || (item?.href === '/profile' && pathDirect === '/settings')}
+          icon={Itemicon}
+          component="div"
+          link={item.href}
+          badge={item.chip ? true : false}
+          badgeContent={item.chip || ""}
+          badgeColor="secondary"
+          disabled={item.disabled}
+          borderRadius='999px'
+        >
+          <Typography component='span' sx={{ color: pathDirect === item?.href ? '#fff' : 'inherit' }}>
+            {item.title}
+          </Typography>
+
+        </MenuItem>
+      </Link>
+    );
+  });
+};
+
+const SidebarItems = () => {
+  const pathname = usePathname();
+  const pathDirect = pathname;
+  const { user } = useAuthStore();
+  const { hasActiveSubscription } = useSubscriptionAccess();
+  const roleSlugs = user?.roleSlugs || [];
+  const menuItems = filterMenuByRole(MyEasyHandMenuItems, roleSlugs, hasActiveSubscription);
+
+  return (
+    <Box sx={{
+      px: "16px", overflowX: "hidden",
+      "& .MuiChip-root": {
+        color: "#1e88e5 !important",
+      },
+      "& .MuiChip-label": {
+        color: "#1e88e5 !important",
+      },
+    }}>
+      <MUI_Sidebar
+        width={"100%"}
+        showProfile={false}
+        themeColor="#31c1ca"
+        themeSecondaryColor="#EDF5FD"
+      >
+        {renderMenuItems(menuItems, pathDirect)}
+
+      </MUI_Sidebar>
+
+    </Box>
+  );
+};
+
+export default SidebarItems;
+
+
+
+

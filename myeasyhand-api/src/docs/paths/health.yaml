@@ -1,0 +1,22 @@
+paths:
+  /health:
+    get:
+      summary: 'Health check'
+      tags: [Health]
+      security: []
+      responses:
+        '200':
+          description: Success
+        '401':
+          description: Unauthorized
+
+  /health/ready:
+    get:
+      summary: 'Readiness check (MongoDB + Redis)'
+      tags: [Health]
+      security: []
+      responses:
+        '200':
+          description: Success
+        '401':
+          description: Unauthorized

@@ -1,0 +1,144 @@
+paths:
+  /media/category-image:
+    post:
+      summary: 'Upload category image'
+      tags: [Media]
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+      responses:
+        '201':
+          description: Success
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+
+  /media/service-image:
+    post:
+      summary: 'Upload service image'
+      tags: [Media]
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+      responses:
+        '201':
+          description: Success
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+
+  /media/service-gallery:
+    post:
+      summary: 'Upload service gallery image'
+      tags: [Media]
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+      responses:
+        '201':
+          description: Success
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+
+  /media/business-document:
+    post:
+      summary: 'Upload business document'
+      tags: [Media]
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+      responses:
+        '201':
+          description: Success
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+
+  /media/promotion-background-image:
+    post:
+      summary: 'Upload promotion background image'
+      tags: [Media]
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+      responses:
+        '201':
+          description: Success
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+
+  /media/promotion-background-video:
+    post:
+      summary: 'Upload promotion background video'
+      tags: [Media]
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+      responses:
+        '201':
+          description: Success
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden

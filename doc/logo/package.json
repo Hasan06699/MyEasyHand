@@ -1,0 +1,19 @@
+{
+  "name": "logo",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "generate": "node generate-assets.js",
+    "deploy": "node generate-assets.js && node deploy-brand.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@resvg/resvg-js": "^2.6.2",
+    "png-to-ico": "^3.0.1",
+    "sharp": "^0.35.2"
+  }
+}

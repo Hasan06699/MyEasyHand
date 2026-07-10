@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 248 250 252;
+    --foreground: 15 23 42;
+    --card: 255 255 255;
+    --primary: 63 175 176;
+    --primary-foreground: 255 255 255;
+    --secondary: 18 43 99;
+    --muted: 241 245 249;
+    --muted-foreground: 100 116 139;
+    --border: 226 232 240;
+    --radius: 0.75rem;
+    --brand-header: 0 60 64;
+    --brand-teal: 63 175 176;
+    --brand-navy: 18 43 99;
+  }
+
+  * {
+    @apply border-slate-200;
+  }
+
+  body {
+    @apply bg-slate-50 text-slate-900 antialiased;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .gradient-primary {
+    background: linear-gradient(135deg, #003c40 0%, #3fafb0 100%);
+  }
+
+  .glass {
+    @apply bg-white/80 backdrop-blur-md;
+  }
+}

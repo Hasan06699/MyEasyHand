@@ -1,0 +1,43 @@
+paths:
+  /platform-settings/public:
+    get:
+      summary: 'Get public platform settings'
+      tags: [Platform Settings]
+      security: []
+      responses:
+        '200':
+          description: Success
+        '401':
+          description: Unauthorized
+
+  /platform-settings/auth:
+    get:
+      summary: 'Get auth settings (admin)'
+      tags: [Platform Settings]
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Success
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+    put:
+      summary: 'Update auth settings (admin)'
+      tags: [Platform Settings]
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Success
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden

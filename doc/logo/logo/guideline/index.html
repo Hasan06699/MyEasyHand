@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MyEasyHand Brand Guidelines</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/png" href="../favicon/favicon-32.png">
+</head>
+<body>
+  <button class="mobile-nav-toggle" aria-label="Toggle navigation" onclick="document.querySelector('.sidebar').classList.toggle('open')">Menu</button>
+
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <img src="assets/logo-standard.png" alt="MyEasyHand">
+        <p>Brand Guidelines v1.0</p>
+      </div>
+      <nav>
+        <ul>
+          <li class="nav-group">Introduction</li>
+          <li><a href="#cover">Cover</a></li>
+          <li><a href="#overview">Brand Overview</a></li>
+          <li><a href="#concept">Logo Concept</a></li>
+          <li class="nav-group">Logo System</li>
+          <li><a href="#construction">Construction</a></li>
+          <li><a href="#safe-area">Safe Area</a></li>
+          <li><a href="#minimum-size">Minimum Size</a></li>
+          <li><a href="#light-version">Light Version</a></li>
+          <li><a href="#dark-version">Dark Version</a></li>
+          <li><a href="#white-version">White Version</a></li>
+          <li><a href="#icon-usage">Icon Usage</a></li>
+          <li class="nav-group">Visual Identity</li>
+          <li><a href="#colors">Color Palette</a></li>
+          <li><a href="#typography">Typography</a></li>
+          <li><a href="#ui-system">UI Color System</a></li>
+          <li class="nav-group">Applications</li>
+          <li><a href="#mobile">Mobile App</a></li>
+          <li><a href="#website">Website</a></li>
+          <li><a href="#admin">Admin Panel</a></li>
+          <li class="nav-group">Rules</li>
+          <li><a href="#correct-usage">Correct Usage</a></li>
+          <li><a href="#incorrect-usage">Incorrect Usage</a></li>
+          <li class="nav-group">Resources</li>
+          <li><a href="#exports">Export Files</a></li>
+          <li><a href="#folder-structure">Folder Structure</a></li>
+          <li><a href="#version-history">Version History</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main class="main">
+      <!-- Cover -->
+      <section id="cover" class="cover">
+        <div class="cover-logo">
+          <img src="assets/logo-standard.png" alt="MyEasyHand Logo">
+        </div>
+        <h1>MyEasyHand Brand Guidelines</h1>
+        <p class="subtitle">A complete visual identity system for the modern home services booking platform.</p>
+        <span class="version-badge">Version 1.0 — June 2026</span>
+        <span class="scroll-hint">Scroll to explore ↓</span>
+      </section>
+
+      <!-- Brand Overview -->
+      <section id="overview" class="section">
+        <h2>Brand Overview</h2>
+        <p class="lead">MyEasyHand is a modern, premium home services booking platform built on trust, technology, and simplicity.</p>
+        <div class="card-grid">
+          <div class="card">
+            <h3 style="margin-top:0">Modern</h3>
+            <p style="margin:0;font-size:0.875rem;color:var(--text-muted)">Clean lines, flat design, and mobile-first thinking define our visual language.</p>
+          </div>
+          <div class="card">
+            <h3 style="margin-top:0">Premium</h3>
+            <p style="margin:0;font-size:0.875rem;color:var(--text-muted)">Refined typography and balanced proportions convey quality and professionalism.</p>
+          </div>
+          <div class="card">
+            <h3 style="margin-top:0">Trustworthy</h3>
+            <p style="margin:0;font-size:0.875rem;color:var(--text-muted)">Deep blue anchors the brand with stability; teal signals action and reliability.</p>
+          </div>
+          <div class="card">
+            <h3 style="margin-top:0">Technology Driven</h3>
+            <p style="margin:0;font-size:0.875rem;color:var(--text-muted)">Digital-first design optimized for apps, dashboards, and responsive web.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Logo Concept -->
+      <section id="concept" class="section section-alt">
+        <div class="section-inner">
+          <h2>Logo Concept</h2>
+          <p class="lead">The MyEasyHand mark combines three symbolic elements that communicate our core value proposition.</p>
+          <div class="concept-diagram">
+            <div class="concept-item">
+              <div class="icon-circle">📅</div>
+              <h4>Calendar</h4>
+              <p>Appointment booking — scheduling services at your convenience.</p>
+            </div>
+            <div class="concept-item">
+              <div class="icon-circle">📍</div>
+              <h4>Location Pin</h4>
+              <p>Service location — professionals come directly to you.</p>
+            </div>
+            <div class="concept-item">
+              <div class="icon-circle">⭕</div>
+              <h4>Circle / Base</h4>
+              <p>Confirmed destination — your booking is locked in.</p>
+            </div>
+          </div>
+          <div class="logo-preview light-bg" style="margin-top:2rem">
+            <img src="assets/icon.png" alt="MyEasyHand icon breakdown" style="max-height:120px">
+          </div>
+        </div>
+      </section>
+
+      <!-- Construction -->
+      <section id="construction" class="section">
+        <h2>Logo Construction</h2>
+        <p class="lead">All production assets are exported from the approved final master artwork — never redrawn or recreated.</p>
+        <div class="construction-grid">
+          <div class="logo-preview checkerboard icon-preview">
+            <img src="assets/icon.png" alt="Icon construction">
+          </div>
+          <div>
+            <h3>Master Source Files</h3>
+            <ul class="spec-list">
+              <li><span>Full logo</span><span>source/final-logo.png</span></li>
+              <li><span>Icon only</span><span>source/final-icon.png</span></li>
+              <li><span>Background</span><span>Transparent export</span></li>
+              <li><span>Regenerate</span><span>npm run generate</span></li>
+            </ul>
+            <h3>Wordmark</h3>
+            <ul class="spec-list">
+              <li><span>Font</span><span>Poppins Bold</span></li>
+              <li><span>Weight</span><span>700</span></li>
+              <li><span>"Shiv" color</span><span>#122B63</span></li>
+              <li><span>"ora" color</span><span>Teal gradient</span></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Safe Area -->
+      <section id="safe-area" class="section section-alt">
+        <div class="section-inner">
+          <h2>Safe Area</h2>
+          <p class="lead">Maintain clear space around the logo equal to at least half the icon height on all sides.</p>
+          <div style="text-align:center;padding:2rem 0 3rem">
+            <div class="safe-area-demo">
+              <img src="assets/icon.png" alt="Safe area demonstration" style="max-height:80px">
+            </div>
+          </div>
+          <p>No other graphic elements, text, or borders should intrude into the safe area. This ensures the logo remains legible and visually distinct in all contexts.</p>
+        </div>
+      </section>
+
+      <!-- Minimum Size -->
+      <section id="minimum-size" class="section">
+        <h2>Minimum Size</h2>
+        <p class="lead">To preserve readability, never scale the logo below these minimum dimensions.</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Asset</th>
+              <th>Print</th>
+              <th>Digital</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Full logo (horizontal)</td>
+              <td>30mm wide</td>
+              <td>120px wide</td>
+            </tr>
+            <tr>
+              <td>Icon only</td>
+              <td>10mm wide</td>
+              <td>32px wide</td>
+            </tr>
+            <tr>
+              <td>Favicon</td>
+              <td>—</td>
+              <td>16px (simplified)</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Light Version -->
+      <section id="light-version" class="section section-alt">
+        <div class="section-inner">
+          <h2>Light Version</h2>
+          <p class="lead">The standard logo for light backgrounds. Blue wordmark with teal accent.</p>
+          <div class="logo-preview light-bg">
+            <img src="assets/logo-standard.png" alt="Standard logo on light background">
+          </div>
+          <ul class="download-list">
+            <li><a class="download-btn" href="../svg/logo-standard.svg" download>logo-standard.svg</a></li>
+            <li><a class="download-btn" href="../png/logo-standard.png" download>logo-standard.png</a></li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Dark Version -->
+      <section id="dark-version" class="section">
+        <h2>Dark Version</h2>
+        <p class="lead">For dark backgrounds. White wordmark with teal icon elements.</p>
+        <div class="logo-preview dark-bg">
+          <img src="assets/logo-dark.png" alt="Dark logo on dark background">
+        </div>
+        <ul class="download-list">
+          <li><a class="download-btn" href="../svg/logo-dark.svg" download>logo-dark.svg</a></li>
+          <li><a class="download-btn" href="../png/logo-dark.png" download>logo-dark.png</a></li>
+        </ul>
+      </section>
+
+      <!-- White Version -->
+      <section id="white-version" class="section section-alt">
+        <div class="section-inner">
+          <h2>White Version</h2>
+          <p class="lead">Monochrome white logo for photography overlays, watermarks, and high-contrast applications.</p>
+          <div class="logo-preview dark-bg">
+            <img src="assets/logo-white.png" alt="White logo on dark background">
+          </div>
+          <ul class="download-list">
+            <li><a class="download-btn" href="../svg/logo-white.svg" download>logo-white.svg</a></li>
+            <li><a class="download-btn" href="../png/logo-white.png" download>logo-white.png</a></li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Icon Usage -->
+      <section id="icon-usage" class="section">
+        <h2>Icon Usage</h2>
+        <p class="lead">The standalone icon is used for app icons, favicons, avatars, and compact UI spaces.</p>
+        <div class="card-grid card-grid-2">
+          <div class="card" style="text-align:center">
+            <div class="logo-preview checkerboard icon-preview" style="border:none;box-shadow:none;padding:1rem">
+              <img src="assets/icon.png" alt="MyEasyHand icon">
+            </div>
+            <p style="font-size:0.8125rem;color:var(--text-muted);margin:0">Standard icon — transparent background</p>
+          </div>
+          <div class="card" style="text-align:center">
+            <div class="logo-preview dark-bg icon-preview" style="border:none;box-shadow:none;padding:1rem;border-radius:22%">
+              <img src="assets/icon.png" alt="App icon preview" style="border-radius:0">
+            </div>
+            <p style="font-size:0.8125rem;color:var(--text-muted);margin:0">App icon — use on brand-colored backgrounds</p>
+          </div>
+        </div>
+        <ul class="download-list" style="margin-top:1.5rem">
+          <li><a class="download-btn" href="../svg/icon.svg" download>icon.svg</a></li>
+          <li><a class="download-btn" href="../png/icon.png" download>icon.png</a></li>
+        </ul>
+      </section>
+
+      <!-- Colors -->
+      <section id="colors" class="section section-alt">
+        <div class="section-inner">
+          <h2>Color Palette</h2>
+          <p class="lead">Our color system balances authority with approachability.</p>
+          <div class="card-grid">
+            <div class="color-swatch">
+              <div class="swatch" style="background:#122B63"></div>
+              <div class="info">
+                <div class="name">Primary Blue</div>
+                <div class="hex">#122B63</div>
+                <div class="usage">Headings, primary buttons, "Shiv" wordmark</div>
+              </div>
+            </div>
+            <div class="color-swatch">
+              <div class="swatch" style="background:#3FAFB0"></div>
+              <div class="info">
+                <div class="name">Primary Teal</div>
+                <div class="hex">#3FAFB0</div>
+                <div class="usage">Accents, CTAs, "ora" wordmark, icon highlights</div>
+              </div>
+            </div>
+            <div class="color-swatch">
+              <div class="swatch" style="background:#2E8F93"></div>
+              <div class="info">
+                <div class="name">Secondary Teal</div>
+                <div class="hex">#2E8F93</div>
+                <div class="usage">Hover states, pin shading, secondary elements</div>
+              </div>
+            </div>
+            <div class="color-swatch">
+              <div class="swatch" style="background:#FFFFFF;border-bottom:1px solid var(--border)"></div>
+              <div class="info">
+                <div class="name">White</div>
+                <div class="hex">#FFFFFF</div>
+                <div class="usage">Cards, backgrounds, dark-mode text</div>
+              </div>
+            </div>
+            <div class="color-swatch">
+              <div class="swatch" style="background:#F5F7FA"></div>
+              <div class="info">
+                <div class="name">Light Background</div>
+                <div class="hex">#F5F7FA</div>
+                <div class="usage">Page backgrounds, input fields</div>
+              </div>
+            </div>
+            <div class="color-swatch">
+              <div class="swatch" style="background:#0F172A"></div>
+              <div class="info">
+                <div class="name">Dark Background</div>
+                <div class="hex">#0F172A</div>
+                <div class="usage">Dark mode, footer, admin sidebar</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Typography -->
+      <section id="typography" class="section">
+        <h2>Typography</h2>
+        <p class="lead">Poppins is our primary typeface. Inter serves as an accessible alternative.</p>
+        <div class="font-stack">
+          <div class="font-stack-item">
+            <div class="font-name" style="font-family:Poppins">Poppins</div>
+            <div class="font-role">Primary — Headings, UI, Marketing</div>
+          </div>
+          <div class="font-stack-item">
+            <div class="font-name" style="font-family:Inter,sans-serif">Inter</div>
+            <div class="font-role">Alternative — Body text, data tables</div>
+          </div>
+        </div>
+        <div style="margin-top:2rem">
+          <div class="type-sample">
+            <div class="label">Heading 1 — 40px / Bold</div>
+            <div class="type-h1">Book trusted home services</div>
+          </div>
+          <div class="type-sample">
+            <div class="label">Heading 2 — 32px / Bold</div>
+            <div class="type-h2">Schedule with confidence</div>
+          </div>
+          <div class="type-sample">
+            <div class="label">Heading 3 — 24px / Semi-Bold</div>
+            <div class="type-h3">Your next appointment</div>
+          </div>
+          <div class="type-sample">
+            <div class="label">Body — 16px / Regular</div>
+            <div class="type-body">MyEasyHand connects you with verified professionals for cleaning, repairs, and more — right at your doorstep.</div>
+          </div>
+          <div class="type-sample">
+            <div class="label">Caption — 14px / Regular</div>
+            <div class="type-caption">Available in 50+ cities across India</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- UI System -->
+      <section id="ui-system" class="section section-alt">
+        <div class="section-inner">
+          <h2>UI Color System</h2>
+          <p class="lead">Apply brand colors consistently across product interfaces.</p>
+
+          <h3>Buttons</h3>
+          <div class="ui-demo">
+            <div class="ui-buttons">
+              <button class="btn btn-primary">Primary Action</button>
+              <button class="btn btn-secondary">Secondary Action</button>
+              <button class="btn btn-outline">Outline</button>
+            </div>
+          </div>
+
+          <h3>Cards</h3>
+          <div class="ui-demo">
+            <div class="ui-card">
+              <h4>Service Booking</h4>
+              <p>Deep cleaning scheduled for Saturday, 10:00 AM at your home address.</p>
+            </div>
+          </div>
+
+          <h3>Spacing Scale</h3>
+          <p>Base unit: 8px. Use multiples for consistent rhythm.</p>
+          <div class="spacing-demo">
+            <div class="spacing-block" style="width:8px;height:32px">8</div>
+            <div class="spacing-block" style="width:16px;height:32px">16</div>
+            <div class="spacing-block" style="width:24px;height:32px">24</div>
+            <div class="spacing-block" style="width:32px;height:32px">32</div>
+            <div class="spacing-block" style="width:48px;height:32px">48</div>
+            <div class="spacing-block" style="width:64px;height:32px">64</div>
+          </div>
+
+          <h3>Grid</h3>
+          <p>12-column responsive grid with 8px gutters.</p>
+          <div class="grid-demo">
+            <div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div>
+            <div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div>
+            <div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div>
+            <div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Mobile -->
+      <section id="mobile" class="section">
+        <h2>Mobile App Usage</h2>
+        <p class="lead">App icons use the standalone icon on a transparent or brand-colored background.</p>
+        <table>
+          <thead>
+            <tr><th>File</th><th>Size</th><th>Usage</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>app-icon-1024.png</td><td>1024 × 1024</td><td>App Store / Play Store</td></tr>
+            <tr><td>app-icon-512.png</td><td>512 × 512</td><td>High-res launcher</td></tr>
+            <tr><td>app-icon-256.png</td><td>256 × 256</td><td>Standard launcher</td></tr>
+            <tr><td>app-icon-180.png</td><td>180 × 180</td><td>Apple Touch Icon</td></tr>
+          </tbody>
+        </table>
+        <div class="card-grid" style="margin-top:1.5rem">
+          <div class="card" style="text-align:center;padding:2rem">
+            <img src="../mobile/app-icon-256.png" alt="App icon 256" style="width:96px;height:96px;margin:0 auto;border-radius:22%">
+            <p style="font-size:0.75rem;color:var(--text-muted);margin:1rem 0 0">256px preview</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Website -->
+      <section id="website" class="section section-alt">
+        <div class="section-inner">
+          <h2>Website Usage</h2>
+          <p class="lead">Header and footer logos are optimized for web navigation contexts.</p>
+          <div class="card-grid card-grid-2">
+            <div class="card">
+              <h3 style="margin-top:0">Header Logo</h3>
+              <div class="logo-preview white-bg" style="min-height:80px">
+                <img src="../website/header-logo.svg" alt="Header logo" style="max-height:40px">
+              </div>
+              <ul class="download-list">
+                <li><a class="download-btn" href="../website/header-logo.svg" download>header-logo.svg</a></li>
+                <li><a class="download-btn" href="../website/header-logo.png" download>header-logo.png</a></li>
+              </ul>
+            </div>
+            <div class="card">
+              <h3 style="margin-top:0">Footer Logo</h3>
+              <div class="logo-preview dark-bg" style="min-height:80px">
+                <img src="../website/footer-logo.svg" alt="Footer logo" style="max-height:36px">
+              </div>
+              <ul class="download-list">
+                <li><a class="download-btn" href="../website/footer-logo.svg" download>footer-logo.svg</a></li>
+                <li><a class="download-btn" href="../website/footer-logo.png" download>footer-logo.png</a></li>
+              </ul>
+            </div>
+          </div>
+          <h3 style="margin-top:2rem">Favicons</h3>
+          <div class="card-grid">
+            <div class="card" style="text-align:center">
+              <img src="../favicon/favicon-16.png" alt="16px favicon" style="width:16px;height:16px;margin:0 auto">
+              <p style="font-size:0.75rem;margin:0.5rem 0 0">16px</p>
+            </div>
+            <div class="card" style="text-align:center">
+              <img src="../favicon/favicon-32.png" alt="32px favicon" style="width:32px;height:32px;margin:0 auto">
+              <p style="font-size:0.75rem;margin:0.5rem 0 0">32px</p>
+            </div>
+            <div class="card" style="text-align:center">
+              <img src="../favicon/favicon-48.png" alt="48px favicon" style="width:48px;height:48px;margin:0 auto">
+              <p style="font-size:0.75rem;margin:0.5rem 0 0">48px</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Admin -->
+      <section id="admin" class="section">
+        <h2>Admin Panel Usage</h2>
+        <p class="lead">Dedicated assets for dashboard sidebar, collapsed state, and login screens.</p>
+        <div class="card-grid">
+          <div class="card">
+            <h3 style="margin-top:0">Sidebar Logo</h3>
+            <div class="logo-preview white-bg">
+              <img src="../admin/sidebar-logo.svg" alt="Sidebar logo" style="max-height:36px">
+            </div>
+          </div>
+          <div class="card">
+            <h3 style="margin-top:0">Collapsed Icon</h3>
+            <div class="logo-preview white-bg icon-preview">
+              <img src="../admin/collapsed-icon.svg" alt="Collapsed icon" style="max-height:48px">
+            </div>
+          </div>
+          <div class="card">
+            <h3 style="margin-top:0">Login Logo</h3>
+            <div class="logo-preview light-bg">
+              <img src="../admin/login-logo.svg" alt="Login logo" style="max-height:80px">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Correct Usage -->
+      <section id="correct-usage" class="section section-alt">
+        <div class="section-inner">
+          <h2>Correct Usage</h2>
+          <p class="lead">Follow these practices to maintain brand integrity.</p>
+          <div class="usage-grid">
+            <div class="usage-item correct">
+              <div class="preview light-bg"><img src="assets/logo-standard.png" alt="Correct" style="max-height:48px"></div>
+              <div class="label">Standard logo on light background</div>
+            </div>
+            <div class="usage-item correct">
+              <div class="preview dark-bg"><img src="assets/logo-dark.png" alt="Correct dark" style="max-height:48px"></div>
+              <div class="label">Dark logo on dark background</div>
+            </div>
+            <div class="usage-item correct">
+              <div class="preview checkerboard icon-preview"><img src="assets/icon.png" alt="Correct icon" style="max-height:64px"></div>
+              <div class="label">Icon with adequate clear space</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Incorrect Usage -->
+      <section id="incorrect-usage" class="section">
+        <h2>Incorrect Usage</h2>
+        <p class="lead">Avoid these common mistakes that compromise brand recognition.</p>
+        <div class="usage-grid">
+          <div class="usage-item incorrect">
+            <div class="preview light-bg"><img src="assets/logo-standard.png" alt="Stretched" class="logo-stretched" style="max-height:48px"></div>
+            <div class="label">Do not stretch or distort</div>
+          </div>
+          <div class="usage-item incorrect">
+            <div class="preview light-bg"><img src="assets/logo-standard.png" alt="Rotated" class="logo-rotated" style="max-height:48px"></div>
+            <div class="label">Do not rotate the logo</div>
+          </div>
+          <div class="usage-item incorrect">
+            <div class="preview" style="background:#FF6B6B"><img src="assets/logo-standard.png" alt="Low contrast" class="logo-low-contrast" style="max-height:48px"></div>
+            <div class="label">Do not use low-contrast backgrounds</div>
+          </div>
+          <div class="usage-item incorrect">
+            <div class="preview light-bg"><img src="assets/logo-standard.png" alt="Too small" style="max-height:16px"></div>
+            <div class="label">Do not scale below minimum size</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Exports -->
+      <section id="exports" class="section section-alt">
+        <div class="section-inner">
+          <h2>Export Files</h2>
+          <p class="lead">All production-ready assets are available in SVG (vector) and PNG (raster) formats.</p>
+          <table>
+            <thead>
+              <tr><th>Category</th><th>Formats</th><th>Scales</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Primary logos</td><td>SVG, PNG</td><td>1×, 2×, 4×</td></tr>
+              <tr><td>Mobile app icons</td><td>PNG</td><td>180, 256, 512, 1024</td></tr>
+              <tr><td>Website assets</td><td>SVG, PNG</td><td>1×, 2×, 4×</td></tr>
+              <tr><td>Admin panel</td><td>SVG, PNG</td><td>1×, 2×, 4×</td></tr>
+              <tr><td>Favicons</td><td>PNG, ICO</td><td>16, 32, 48</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Folder Structure -->
+      <section id="folder-structure" class="section">
+        <h2>Folder Structure</h2>
+        <p class="lead">All brand assets are organized in the following directory structure.</p>
+        <pre class="folder-tree"><span class="folder">source/</span>
+│   ├── <span class="file">final-logo.png</span>
+│   └── <span class="file">final-icon.png</span>
+<span class="folder">logo/</span>
+├── <span class="folder">svg/</span>
+│   ├── <span class="file">logo-standard.svg</span>
+│   ├── <span class="file">logo-dark.svg</span>
+│   ├── <span class="file">logo-white.svg</span>
+│   └── <span class="file">icon.svg</span>
+├── <span class="folder">png/</span>
+│   ├── <span class="file">logo-standard.png</span> (+ @2x, @4x)
+│   ├── <span class="file">logo-dark.png</span>
+│   ├── <span class="file">logo-white.png</span>
+│   └── <span class="file">icon.png</span>
+├── <span class="folder">mobile/</span>
+│   ├── <span class="file">app-icon-1024.png</span>
+│   ├── <span class="file">app-icon-512.png</span>
+│   ├── <span class="file">app-icon-256.png</span>
+│   └── <span class="file">app-icon-180.png</span>
+├── <span class="folder">website/</span>
+│   ├── <span class="file">header-logo.svg / .png</span>
+│   └── <span class="file">footer-logo.svg / .png</span>
+├── <span class="folder">admin/</span>
+│   ├── <span class="file">sidebar-logo.svg / .png</span>
+│   ├── <span class="file">collapsed-icon.svg / .png</span>
+│   └── <span class="file">login-logo.svg / .png</span>
+├── <span class="folder">favicon/</span>
+│   ├── <span class="file">favicon-16.png</span>
+│   ├── <span class="file">favicon-32.png</span>
+│   ├── <span class="file">favicon-48.png</span>
+│   └── <span class="file">favicon.ico</span>
+└── <span class="folder">guideline/</span>
+    ├── <span class="file">index.html</span>
+    ├── <span class="file">style.css</span>
+    └── <span class="folder">assets/</span></pre>
+      </section>
+
+      <!-- Version History -->
+      <section id="version-history" class="section section-alt">
+        <div class="section-inner">
+          <h2>Version History</h2>
+          <table>
+            <thead>
+              <tr><th>Version</th><th>Date</th><th>Changes</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1.0</td>
+                <td>June 2026</td>
+                <td>Initial brand package — exported from final master logos, full asset suite, and digital guidelines.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <footer class="guideline-footer">
+        <p>© 2026 MyEasyHand. All rights reserved. For questions, contact your brand administrator.</p>
+      </footer>
+    </main>
+  </div>
+
+  <script>
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.sidebar nav a');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navLinks.forEach(link => {
+            link.classList.toggle('active', link.getAttribute('href') === '#' + entry.target.id);
+          });
+        }
+      });
+    }, { rootMargin: '-20% 0px -70% 0px' });
+
+    sections.forEach(section => observer.observe(section));
+
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        document.querySelector('.sidebar').classList.remove('open');
+      });
+    });
+  </script>
+</body>
+</html>

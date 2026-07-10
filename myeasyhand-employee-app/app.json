@@ -1,0 +1,33 @@
+{
+  "expo": {
+    "name": "MyEasyHand Employee",
+    "slug": "myeasyhand-employee",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
+    "scheme": "myeasyhand-employee",
+    "userInterfaceStyle": "automatic",
+    "splash": {
+      "image": "./assets/images/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#122B63"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "info.myeasyhand.employee"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "backgroundColor": "#122B63"
+      },
+      "package": "info.myeasyhand.employee"
+    },
+    "plugins": [
+      "expo-router"
+    ],
+    "experiments": {
+      "typedRoutes": true
+    }
+  }
+}
